@@ -3,7 +3,7 @@ import 'package:firefly/Model/ChatModel.dart';
 import 'package:material_ui/material_ui.dart';
 
 class ChatPage extends StatefulWidget {
-  ChatPage({Key? key}) : super(key: key);
+  const ChatPage({super.key});
 
   @override
     _ChatPageState createState() => _ChatPageState();

@@ -1,18 +1,18 @@
 import 'package:firefly/Screens/chatscreen.dart';
 import 'package:firefly/Model/ChatModel.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
-class buttonscreen extends StatefulWidget {
+class ButtonScreen extends StatefulWidget {
   const new({super.key});
 
   @override
-  State<buttonscreen> createState() => _buttonscreenState();
+  State<ButtonScreen> createState() => _ButtonScreenState();
 }
 
-class _buttonscreenState extends State<buttonscreen> {
+class _ButtonScreenState extends State<ButtonScreen> {
 
-  List<Chatmodel> chats = [
-    Chatmodel(
+  List<ChatModel> chats = [
+    ChatModel(
       name: "name1",
       isGroup: false,
       currentMessage: "message1",
