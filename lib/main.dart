@@ -1,7 +1,7 @@
 import 'package:firefly/Screens/buttonscreen.dart';
 import 'package:firefly/Screens/chatscreen.dart';
 import 'package:firefly/Screens/homescreen.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 
@@ -50,11 +50,11 @@ class _MyAppState extends State<MyApp> {
           style: TextButton.styleFrom(
             backgroundColor: Color.fromRGBO(25, 42, 86, 1),
             foregroundColor: Color.fromRGBO(220, 221, 225, 1),
-            padding: EdgeInsets.all(20)
-          )
-        )
+            padding: EdgeInsets.all(20),
+          ),
+        ),
       ),
-      home: buttonscreen()
+      home: SafeArea(child: ButtonScreen()),
     );
   }
 }
