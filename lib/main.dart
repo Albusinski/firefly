@@ -1,3 +1,4 @@
+import 'package:firefly/Pages/SettingsAppearance.dart';
 import 'package:firefly/Screens/buttonscreen.dart';
 import 'package:firefly/Screens/chatscreen.dart';
 import 'package:firefly/Screens/homescreen.dart';
@@ -59,6 +60,9 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       home: SafeArea(child: Homescreen()),
+      // routes: {
+      //   '/appearance':(context) => const SettingsAppearance(),
+      // }, - alternatywa, laguje apke
     );
   }
 }

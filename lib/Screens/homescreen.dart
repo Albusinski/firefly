@@ -1,3 +1,8 @@
+import 'package:firefly/Pages/SettingsAppearance.dart';
+import 'package:firefly/Pages/SettingsNetwork.dart';
+import 'package:firefly/Pages/SettingsNotifications.dart';
+import 'package:firefly/Pages/SettingsPrivacy.dart';
+import 'package:firefly/Pages/SettingsStorage.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:firefly/Pages/ChatPage.dart';
 import 'package:firefly/CustomUI/SettingsTile.dart';
@@ -48,7 +53,7 @@ class _HomescreenState extends State<Homescreen>
         children: [
           ChatPage(),
 
-          ListView(
+          Column(
             children: [
               // tutaj dodajesz zakladke ustawien, nick itp itd
               Padding(
@@ -86,26 +91,31 @@ class _HomescreenState extends State<Homescreen>
                 icon: Icons.palette,
                 title: "Appearance",
                 subtitle: "Theme, text size, chat background",
+                page: SettingsAppearance(),
               ),
               SettingsTile(
                 title: "Privacy",
                 subtitle: "Receipts, visibility, blocked contacts",
                 icon: Icons.lock,
+                page: SettingsPrivacy(),
               ),
               SettingsTile(
                 title: "Notifications",
                 subtitle: "Banners and haptics",
                 icon: Icons.notifications,
+                page: Settingsnotifications(),
               ),
               SettingsTile(
                 title: "Storage",
                 subtitle: "Manage cached media and cleanup",
                 icon: Icons.storage,
+                page: SettingsStorage(),
               ),
               SettingsTile(
                 title: "Network",
                 subtitle: "Wi-Fi Direct connections and controls",
                 icon: Icons.network_cell,
+                page: SettingsNetwork(),
               ),
 
               // never - czerwony kurwa
