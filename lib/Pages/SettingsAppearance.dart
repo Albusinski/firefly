@@ -10,6 +10,18 @@ class SettingsAppearance extends StatefulWidget {
 class _SettingsAppearanceState extends State<SettingsAppearance> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Appearance"),
+        leading: InkWell(onTap: () {
+          Navigator.pop(context);
+        }, child: Icon(Icons.arrow_back)),
+      ),
+      body: SafeArea(child: Column(
+        // spacing: 80,
+        children: [
+        ],
+      )),
+    );
   }
 }
