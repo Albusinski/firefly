@@ -1,12 +1,6 @@
-import 'package:firefly/Pages/SettingsAppearance.dart';
-import 'package:firefly/Pages/SettingsNetwork.dart';
-import 'package:firefly/Pages/SettingsNotifications.dart';
 import 'package:firefly/Pages/SettingsPage.dart';
-import 'package:firefly/Pages/SettingsPrivacy.dart';
-import 'package:firefly/Pages/SettingsStorage.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:firefly/Pages/ChatPage.dart';
-import 'package:firefly/CustomUI/SettingsTile.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
