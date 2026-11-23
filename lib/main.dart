@@ -2,6 +2,7 @@ import 'package:firefly/Pages/SettingsAppearance.dart';
 import 'package:firefly/Screens/buttonscreen.dart';
 import 'package:firefly/Screens/chatscreen.dart';
 import 'package:firefly/Screens/homescreen.dart';
+import 'package:firefly/Screens/welcomescreen.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:device_info_plus/device_info_plus.dart';

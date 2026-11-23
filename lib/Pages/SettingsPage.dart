@@ -1,3 +1,4 @@
+import 'package:firefly/CustomUI/SettingsProfile.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:firefly/Pages/SettingsAppearance.dart';
 import 'package:firefly/Pages/SettingsNetwork.dart';
@@ -13,29 +14,8 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // tutaj dodajesz zakladke ustawien, nick itp itd
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: CircleAvatar(radius: 75, child: Text("cokrowa")),
-        ),
-
-        Row(
-          children: [
-            Text(
-              "Nickname",
-              style: TextStyle(fontSize: 45, color: Colors.indigoAccent),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: InkWell(
-                onTap: () {},
-                child: Icon(Icons.edit_rounded),
-              ),
-            ),
-            // Text("Change nickname", style: TextStyle(fontSize: 20, color: Colors.orange)),
-          ],
-        ),
-
+        SettingsProfile(),
+        // Zostawilem to na dole bo bede pamietac jak sie textfieldy robi
         // Tutaj jest textfield na username ale chyba tego tak nie uzyje
         // Padding(
         //   padding: const EdgeInsets.all(10.0),
@@ -76,10 +56,10 @@ class SettingsPage extends StatelessWidget {
           page: SettingsNetwork(),
         ),
 
-        // never - czerwony kurwa
+        // never - czerwony
         Center(
           child: Text(
-            "Your Messages NEVER touch a sever!!! ",
+            "Your Messages NEVER touch a server!!! ",
             style: TextStyle(fontSize: 18),
           ),
         ),
@@ -93,3 +73,5 @@ class SettingsPage extends StatelessWidget {
     );
   }
 }
+
+

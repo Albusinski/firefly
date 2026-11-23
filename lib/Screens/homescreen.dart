@@ -48,6 +48,7 @@ class _HomescreenState extends State<Homescreen>
         children: [
           ChatPage(),
           SettingsPage(),
+          // odkad chatpage i settingspage jest osobno, aplikacja mniej laguje
         ],
       ),
     );

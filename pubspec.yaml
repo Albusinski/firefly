@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   permission_handler: ^13.0.2
   device_info_plus: ^13.3.0
+  introduction_screen: ^5.0.1
 
 dev_dependencies:
   flutter_test:
