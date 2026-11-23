@@ -3,7 +3,9 @@ import 'package:firefly/Model/ChatModel.dart';
 import 'package:material_ui/material_ui.dart';
 
 class ButtonScreen extends StatefulWidget {
-  const new({super.key});
+  final ChatModel chatModel;
+
+  const ButtonScreen({super.key, required this.chatModel});
 
   @override
   State<ButtonScreen> createState() => _ButtonScreenState();
@@ -28,7 +30,10 @@ class _ButtonScreenState extends State<ButtonScreen> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: ((context) => Chatscreen())),
+              MaterialPageRoute(
+                builder: (context) => Chatscreen(chatModel: widget.chatModel),
+              ),
+
           );
         },
         child: Center(child: const Text("test", style: TextStyle(fontSize: 34)),),

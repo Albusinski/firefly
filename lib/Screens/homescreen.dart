@@ -1,5 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:firefly/Pages/ChatPage.dart';
+import 'package:firefly/CustomUI/SettingsTile.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -15,7 +16,7 @@ class _HomescreenState extends State<Homescreen>
   @override
   void initState() {
     super.initState();
-    _controller = TabController(length: 4, vsync: this, initialIndex: 0);
+    _controller = TabController(length: 2, vsync: this, initialIndex: 0);
   }
 
   @override
@@ -31,54 +32,99 @@ class _HomescreenState extends State<Homescreen>
         title: const Text("Firefly"),
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-          PopupMenuButton<String>(
-            onSelected: (value) {
-              print(value);
-            },
-            itemBuilder: (context) {
-              return [
-                const PopupMenuItem(
-                  value: "New group",
-                  child: Text("New group"),
-                ),
-                const PopupMenuItem(
-                  value: "New broadcast",
-                  child: Text("New broadcast"),
-                ),
-                const PopupMenuItem(
-                  value: "Firefly Web",
-                  child: Text("Firefly Web"),
-                ),
-                const PopupMenuItem(
-                  value: "Starred messages",
-                  child: Text("Starred messages"),
-                ),
-                const PopupMenuItem(value: "Settings", child: Text("Settings")),
-              ];
-            },
-          ),
+          // appbar tutaj dodajesz te u gory
         ],
         bottom: TabBar(
           controller: _controller,
           indicatorColor: Colors.white,
           tabs: const [
-            Tab(icon: Icon(Icons.camera_alt)),
             Tab(text: "CHATS"),
-            Tab(text: "STATUS"),
-            Tab(text: "CALLS"),
+            Tab(icon: Icon(Icons.settings)),
           ],
         ),
       ),
       body: TabBarView(
         controller: _controller,
         children: [
-          const Center(child: Text("Camera")),
           ChatPage(),
-          const Center(child: Text("Status")),
-          const Center(child: Text("Calls")),
+
+          ListView(
+            children: [
+              // tutaj dodajesz zakladke ustawien, nick itp itd
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CircleAvatar(radius: 75, child: Text("cokrowa")),
+              ),
+
+              Row(
+                children: [
+                  Text(
+                    "Nickname",
+                    style: TextStyle(fontSize: 45, color: Colors.indigoAccent),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Icon(Icons.edit_rounded),
+                    ),
+                  ),
+                  // Text("Change nickname", style: TextStyle(fontSize: 20, color: Colors.orange)),
+                ],
+              ),
+
+              // Tutaj jest textfield na username ale chyba tego tak nie uzyje
+              // Padding(
+              //   padding: const EdgeInsets.all(10.0),
+              //   child: TextField(
+              //     maxLength: 32,
+              //     textCapitalization: TextCapitalization.words,
+              //     decoration: InputDecoration(hintText: "Podaj Nickname"),
+              //   ),
+              // ),
+              SettingsTile(
+                icon: Icons.palette,
+                title: "Appearance",
+                subtitle: "Theme, text size, chat background",
+              ),
+              SettingsTile(
+                title: "Privacy",
+                subtitle: "Receipts, visibility, blocked contacts",
+                icon: Icons.lock,
+              ),
+              SettingsTile(
+                title: "Notifications",
+                subtitle: "Banners and haptics",
+                icon: Icons.notifications,
+              ),
+              SettingsTile(
+                title: "Storage",
+                subtitle: "Manage cached media and cleanup",
+                icon: Icons.storage,
+              ),
+              SettingsTile(
+                title: "Network",
+                subtitle: "Wi-Fi Direct connections and controls",
+                icon: Icons.network_cell,
+              ),
+
+              // never - czerwony kurwa
+              Center(
+                child: Text(
+                  "Your Messages NEVER touch a sever!!! ",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              Center(
+                child: Text(
+                  "Firefly 1.0 | WiFi Direct | ECDH P-256 + AES-256-GCM",
+                  style: TextStyle(fontSize: 10),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
   }
 }
-

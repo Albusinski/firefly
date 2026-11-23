@@ -43,9 +43,13 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: "Firefly",
       theme: ThemeData.dark().copyWith(
+        // jak chcesz zmienic srodek tego pola na tekst to , fillColor: Colors.red
+        inputDecorationTheme: InputDecorationTheme(filled: true, hintStyle: TextStyle(color: Color.fromRGBO(220, 221, 225, 0.3, ), fontSize: 18),
+          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),),
         primaryColor: Color.fromRGBO(25, 42, 86, 1),
-        scaffoldBackgroundColor: Color.fromRGBO(245, 240, 250, 1),
+        scaffoldBackgroundColor: Color.fromRGBO(67, 67, 67, 1),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             backgroundColor: Color.fromRGBO(25, 42, 86, 1),
@@ -54,7 +58,7 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       ),
-      home: SafeArea(child: ButtonScreen()),
+      home: SafeArea(child: Homescreen()),
     );
   }
 }
