@@ -7,6 +7,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/services.dart';
+import 'theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,20 +57,9 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Firefly",
-      theme: ThemeData.dark().copyWith(
-        // jak chcesz zmienic srodek tego pola na tekst to , fillColor: Colors.red
-        inputDecorationTheme: InputDecorationTheme(filled: true, hintStyle: TextStyle(color: Color.fromRGBO(220, 221, 225, 0.3, ), fontSize: 18),
-          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),),
-        primaryColor: Color.fromRGBO(25, 42, 86, 1),
-        scaffoldBackgroundColor: Color.fromRGBO(67, 67, 67, 1),
-        textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(
-            backgroundColor: Color.fromRGBO(25, 42, 86, 1),
-            foregroundColor: Color.fromRGBO(220, 221, 225, 1),
-            padding: EdgeInsets.all(20),
-          ),
-        ),
-      ),
+      theme: FlylorsTheme.light,
+      darkTheme: FlylorsTheme.dark,
+      themeMode: ThemeMode.system,
       home: SafeArea(child: Homescreen()),
       // routes: {
       //   '/appearance':(context) => const SettingsAppearance(),

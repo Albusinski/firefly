@@ -1,0 +1,1 @@
+// tutaj tworzy sie nowy pin do aplikacji, odwoluje sie do tego settingsprivacy

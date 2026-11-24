@@ -20,6 +20,7 @@ class _SettingsnotificationsState extends State<Settingsnotifications> {
       body: SafeArea(child: Column(
         // spacing: 80,
         children: [
+
         ],
       )),
     );
