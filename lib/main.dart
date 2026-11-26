@@ -3,6 +3,7 @@ import 'package:firefly/Screens/buttonscreen.dart';
 import 'package:firefly/Screens/chatscreen.dart';
 import 'package:firefly/Screens/homescreen.dart';
 import 'package:firefly/Screens/welcomescreen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -19,17 +20,21 @@ void main() async {
     ]
   );
 
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  ConsumerState<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends ConsumerState<MyApp> {
   @override
   void initState() {
     super.initState();
@@ -54,16 +59,16 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    final themeMode = ref.watch(themeNotifierProvider);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Firefly",
       theme: FlylorsTheme.light,
       darkTheme: FlylorsTheme.dark,
-      themeMode: ThemeMode.system,
+      themeMode: themeMode,
+      themeAnimationDuration: Duration(milliseconds: 25),
       home: SafeArea(child: Homescreen()),
-      // routes: {
-      //   '/appearance':(context) => const SettingsAppearance(),
-      // }, - alternatywa, laguje apke
     );
   }
 }

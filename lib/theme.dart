@@ -1,84 +1,116 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 
-// wiesz bo To nie colors tylko fireflycolors hehe flylors firelors colofly KUR*A MAC PO PROSTU NIE MOZE BYC FCOLORS
-// class Flylorsbackup {
-//   static const black = Color(0xff000000);
-//   static const accent = Color(0xffF2A65A)
-//   static const accent1 = Color(0xffB98235);
-//   static const accent2 = Color(0xffE6B85C);
-//   static const accent3 = Color(0xffF5E6B3);
-//   static const primary1 = Color(0xff03045E);
-//   static const primary2 = Color(0xff023E8A);
-//   static const primary3 = Color(0xff0077B6);
-//   static const primary4 = Color(0xff0096C7);
-//   static const primary5 = Color(0xff00B4D8);
-//   static const primary6 = Color(0xff48CAE4);
-//   static const primary7 = Color(0xff90E0EF);
-//   static const primary8 = Color(0xffADE8F4);
-//   static const primary9 = Color(0xffCAF0F8);
-//   static const white = Color(0xffe0f7ff);
-// } gdybym potrzebowal to sa inne kolory
+
+// ============================================================
+// THEME NOTIFIER
+// ============================================================
+
+class ThemeNotifier extends StateNotifier<ThemeMode> {
+  ThemeNotifier() : super(ThemeMode.system);
+
+
+  void toggleTheme() {
+    state = state == ThemeMode.light
+        ? ThemeMode.dark
+        : ThemeMode.light;
+  }
+
+  void setTheme(ThemeMode mode) {
+    state = mode;
+  }
+}
+
+final themeNotifierProvider =
+StateNotifierProvider<ThemeNotifier, ThemeMode>(
+      (ref) => ThemeNotifier(),
+);
+
+// ============================================================
+// FLYLORS LIGHT
+// ============================================================
 
 class Flylorslight {
-  static const black = Color(0xff000000);
-  static const white = Color(0xffFFFFFF);
-  static const accent = Color(0xffF2A65A);
-  static const accent1 = Color(0xffD98B3A);
-  static const accent2 = Color(0xffE6B85C);
-  static const accent3 = Color(0xffF5E6B3);
-  static const primary1 = Color(0xff143601);
-  static const primary2 = Color(0xff1A4301);
-  static const primary3 = Color(0xff245501);
-  static const primary4 = Color(0xff538D22);
-  static const primary5 = Color(0xff73A942);
-  static const primary6 = Color(0xffAAD576);
-  static const primary7 = Color(0xffC5E5A0);
+  // Base
+  static const black = Color(0xFF000000);
+  static const white = Color(0xFFFFFFFF);
+
+  // Accent
+  static const accent = Color(0xFFF2A65A);
+  static const accent1 = Color(0xFFD98B3A);
+  static const accent2 = Color(0xFFE6B85C);
+  static const accent3 = Color(0xFFF5E6B3);
+
+  // Primary
+  static const primary1 = Color(0xFF143601);
+  static const primary2 = Color(0xFF1A4301);
+  static const primary3 = Color(0xFF245501);
+  static const primary4 = Color(0xFF538D22);
+  static const primary5 = Color(0xFF73A942);
+  static const primary6 = Color(0xFFAAD576);
+  static const primary7 = Color(0xFFC5E5A0);
 
   // UI
-  static const border = Color(0xffDCE8CE);
-  static const divider = Color(0xffE8EFDF);
+  static const border = Color(0xFFDCE8CE);
+  static const divider = Color(0xFFE8EFDF);
   static const overlay = Color(0x80000000);
-  static const background = Color(0xffF5F8EF);
-  static const surface = Color(0xffFFFFFF);
-  static const surfaceVariant = Color(0xffEDF4E5);
-  // Tekst
-  static const textPrimary = Color(0xff143601);
-  static const textSecondary = Color(0xff538D22);
-  static const textDisabled = Color(0xffA0AD94);
+
+  static const background = Color(0xFFF5F8EF);
+  static const surface = Color(0xFFFFFFFF);
+  static const surfaceVariant = Color(0xFFEDF4E5);
+
+  // Text
+  static const textPrimary = Color(0xFF143601);
+  static const textSecondary = Color(0xFF538D22);
+  static const textDisabled = Color(0xFFA0AD94);
 }
 
+// ============================================================
+// FLYLORS DARK
+// ============================================================
 
 class Flylorsdark {
-  static const black = Color(0xff000000);
-  static const white = Color(0xffFFFFFF);
-  static const accent = Color(0xffF2A65A);
-  static const accent1 = Color(0xffD98B3A);
-  static const accent2 = Color(0xffE6B85C);
-  static const accent3 = Color(0xffF5E6B3);
-  static const primary1 = Color(0xff0A1C05);
-  static const primary2 = Color(0xff102B06);
-  static const primary3 = Color(0xff193B0A);
-  static const primary4 = Color(0xff2D5718);
-  static const primary5 = Color(0xff538D22);
-  static const primary6 = Color(0xff73A942);
-  static const primary7 = Color(0xffAAD576);
+  // Base
+  static const black = Color(0xFF000000);
+  static const white = Color(0xFFFFFFFF);
+
+  // Accent
+  static const accent = Color(0xFFF2A65A);
+  static const accent1 = Color(0xFFD98B3A);
+  static const accent2 = Color(0xFFE6B85C);
+  static const accent3 = Color(0xFFF5E6B3);
+
+  // Primary
+  static const primary1 = Color(0xFF0A1C05);
+  static const primary2 = Color(0xFF102B06);
+  static const primary3 = Color(0xFF193B0A);
+  static const primary4 = Color(0xFF2D5718);
+  static const primary5 = Color(0xFF538D22);
+  static const primary6 = Color(0xFF73A942);
+  static const primary7 = Color(0xFFAAD576);
+
   // UI
-  static const border = Color(0xff2D4025);
-  static const divider = Color(0xff24351D);
+  static const border = Color(0xFF2D4025);
+  static const divider = Color(0xFF24351D);
   static const overlay = Color(0x80000000);
-  static const background = Color(0xff0D160A);
-  static const surface = Color(0xff152110);
-  static const surfaceVariant = Color(0xff1D2D17);
-  // Tekst
-  static const textPrimary = Color(0xffF1F5EB);
-  static const textSecondary = Color(0xffAAD576);
-  static const textDisabled = Color(0xff718267);
+
+  static const background = Color(0xFF0D160A);
+  static const surface = Color(0xFF152110);
+  static const surfaceVariant = Color(0xFF1D2D17);
+
+  // Text
+  static const textPrimary = Color(0xFFF1F5EB);
+  static const textSecondary = Color(0xFFAAD576);
+  static const textDisabled = Color(0xFF718267);
 }
 
+// ============================================================
+// FLYLORS THEME
+// ============================================================
 
 class FlylorsTheme {
-  static ThemeData light = ThemeData.light().copyWith(
+  static final ThemeData light = ThemeData.light().copyWith(
     brightness: Brightness.light,
 
     scaffoldBackgroundColor: Flylorslight.background,
@@ -87,20 +119,22 @@ class FlylorsTheme {
       primary: Flylorslight.primary2,
       secondary: Flylorslight.accent,
       surface: Flylorslight.surface,
-      error: Color(0xffD32F2F),
+      error: Color(0xFFD32F2F),
       onPrimary: Flylorslight.white,
       onSecondary: Flylorslight.black,
       onSurface: Flylorslight.textPrimary,
     ),
 
-    inputDecorationTheme: InputDecorationTheme(
+    dividerColor: Flylorslight.divider,
+
+    inputDecorationTheme: const InputDecorationTheme(
       filled: true,
       fillColor: Flylorslight.surfaceVariant,
-      hintStyle: const TextStyle(
+      hintStyle: TextStyle(
         fontSize: 18,
         color: Flylorslight.textSecondary,
       ),
-      contentPadding: const EdgeInsets.symmetric(
+      contentPadding: EdgeInsets.symmetric(
         horizontal: 10,
         vertical: 10,
       ),
@@ -114,7 +148,7 @@ class FlylorsTheme {
     ),
   );
 
-  static ThemeData dark = ThemeData.dark().copyWith(
+  static final ThemeData dark = ThemeData.dark().copyWith(
     brightness: Brightness.dark,
 
     scaffoldBackgroundColor: Flylorsdark.background,
@@ -123,20 +157,22 @@ class FlylorsTheme {
       primary: Flylorsdark.primary5,
       secondary: Flylorsdark.accent,
       surface: Flylorsdark.surface,
-      error: Color(0xffEF5350),
+      error: Color(0xFFEF5350),
       onPrimary: Flylorsdark.white,
       onSecondary: Flylorsdark.black,
       onSurface: Flylorsdark.textPrimary,
     ),
 
-    inputDecorationTheme: InputDecorationTheme(
+    dividerColor: Flylorsdark.divider,
+
+    inputDecorationTheme: const InputDecorationTheme(
       filled: true,
       fillColor: Flylorsdark.surfaceVariant,
-      hintStyle: const TextStyle(
+      hintStyle: TextStyle(
         fontSize: 18,
         color: Flylorsdark.textSecondary,
       ),
-      contentPadding: const EdgeInsets.symmetric(
+      contentPadding: EdgeInsets.symmetric(
         horizontal: 10,
         vertical: 10,
       ),

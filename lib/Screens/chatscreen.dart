@@ -1,6 +1,16 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:firefly/Model/ChatModel.dart';
 
+/// Tymczasowy model wiadomości (później możesz przenieść do Model/)
+class _Message {
+  final String text;
+  final bool isMe;
+  final DateTime time;
+
+  _Message({required this.text, required this.isMe, DateTime? time})
+      : time = time ?? DateTime.now();
+}
+
 class Chatscreen extends StatefulWidget {
   final ChatModel chatModel;
 
@@ -11,33 +21,38 @@ class Chatscreen extends StatefulWidget {
 }
 
 class _ChatscreenState extends State<Chatscreen> {
-  @override
-
   final TextEditingController messageController = TextEditingController();
 
-  void sendMessage(){
-    String message = messageController.text;
-    if (message.isEmpty) {
-      return;
-    }
-    setState(() {
+  // Najnowsza wiadomość na indeksie 0 (lista jest odwrócona: reverse: true)
+  final List<_Message> _messages = [];
 
-        });
+  @override
+  void dispose() {
+    messageController.dispose();
+    super.dispose();
+  }
+
+  void sendMessage() {
+    final message = messageController.text.trim();
+    if (message.isEmpty) return;
+
+    setState(() {
+      _messages.insert(0, _Message(text: message, isMe: true));
+    });
 
     messageController.clear();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 85,
         leading: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
+          onTap: () => Navigator.pop(context),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: const [
               Icon(Icons.arrow_back_ios_new, size: 20),
               CircleAvatar(radius: 20),
             ],
@@ -49,37 +64,112 @@ class _ChatscreenState extends State<Chatscreen> {
               "widget.chatModel.isactive",
               style: TextStyle(
                 fontSize: 14,
-                fontWeight: .bold,
+                fontWeight: FontWeight.bold,
                 color: Colors.red,
               ),
-              // Jakby trzeba bylo na zielony ze aktywny to zielony, zmien jeszcze zeby tylko strzalka byla
             ),
             Text(widget.chatModel.name ?? "Chat"),
           ],
         ),
-        actions: [IconButton(icon: Icon(Icons.phone), onPressed: () {})],
+        actions: [IconButton(icon: const Icon(Icons.phone), onPressed: () {})],
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: Stack(
+      body: SafeArea(
+        child: Column(
           children: [
-            ListView(),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Row(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width - 50,
-                    // jesli chcesz powiekszyc maxlength to musisz zwiekszyc max lines
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: TextFormField(controller: messageController, minLines: 1, maxLines: 10 , maxLength: 256, decoration: InputDecoration(hintText: "Wpisz wiadomość..."),),
+            // ---- LISTA WIADOMOŚCI ----
+            Expanded(
+              child: _messages.isEmpty
+                  ? const Center(child: Text("Brak wiadomości"))
+                  : ListView.builder(
+                reverse: true,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
+                itemCount: _messages.length,
+                itemBuilder: (context, i) =>
+                    _MessageBubble(message: _messages[i]),
+              ),
+            ),
+
+            // ---- POLE WPISYWANIA ----
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: TextFormField(
+                      controller: messageController,
+                      minLines: 1,
+                      maxLines: 10,
+                      maxLength: 256,
+                      textCapitalization: TextCapitalization.sentences,
+                      decoration: const InputDecoration(
+                        hintText: "Wpisz wiadomość...",
+                        counterText: '', // ukrywa licznik 0/256
+                      ),
                     ),
                   ),
-                  IconButton(onPressed: sendMessage, icon: Icon(Icons.send_rounded))
-                ],
-              ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: IconButton(
+                    onPressed: sendMessage,
+                    icon: const Icon(Icons.send_rounded),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Pojedynczy dymek czatu
+class _MessageBubble extends StatelessWidget {
+  const _MessageBubble({required this.message});
+  final _Message message;
+
+  String _time(DateTime t) =>
+      '${t.hour.toString().padLeft(2, '0')}:${t.minute.toString().padLeft(2, '0')}';
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final isMe = message.isMe;
+
+    final bg = isMe ? scheme.primary : scheme.surfaceContainerHighest;
+    final fg = isMe ? scheme.onPrimary : scheme.onSurface;
+
+    return Align(
+      alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 3),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width * 0.75,
+        ),
+        decoration: BoxDecoration(
+          color: bg,
+          borderRadius: BorderRadius.only(
+            topLeft: const Radius.circular(18),
+            topRight: const Radius.circular(18),
+            bottomLeft: Radius.circular(isMe ? 18 : 4),
+            bottomRight: Radius.circular(isMe ? 4 : 18),
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(message.text, style: TextStyle(color: fg, fontSize: 16)),
+            const SizedBox(height: 2),
+            Text(
+              _time(message.time),
+              style: TextStyle(color: fg.withValues(alpha: 0.7), fontSize: 11),
             ),
           ],
         ),

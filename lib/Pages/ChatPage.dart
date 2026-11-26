@@ -2,6 +2,7 @@ import 'package:firefly/CustomUI/CustomCard.dart';
 import 'package:firefly/Screens/chatscreen.dart';
 import 'package:firefly/Model/ChatModel.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:firefly/Screens/newchatscreen.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -49,9 +50,15 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.chat),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const NewChatScreen()),
+          );
+        },
+        icon: const Icon(Icons.add_rounded),
+        label: const Text("New Chat"),
       ),
       body: ListView.builder(
         itemCount: chats.length,

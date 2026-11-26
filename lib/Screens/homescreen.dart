@@ -16,7 +16,11 @@ class _HomescreenState extends State<Homescreen>
   @override
   void initState() {
     super.initState();
-    _controller = TabController(length: 2, vsync: this, initialIndex: 0);
+    _controller = TabController(
+      length: 2,
+      vsync: this,
+      initialIndex: 0,
+    );
   }
 
   @override
@@ -27,16 +31,28 @@ class _HomescreenState extends State<Homescreen>
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Firefly"),
+        title: Text(
+          "Firefly",
+          style: TextStyle(
+            fontSize: 18,
+            color: colors.primary,
+          ),
+        ),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-          // appbar tutaj dodajesz te u gory
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.search),
+          ),
         ],
         bottom: TabBar(
           controller: _controller,
-          indicatorColor: Colors.white,
+          indicatorColor: colors.primary,
+          labelColor: colors.primary,
+          unselectedLabelColor: colors.onSurface,
           tabs: const [
             Tab(text: "CHATS"),
             Tab(icon: Icon(Icons.settings)),
@@ -45,10 +61,9 @@ class _HomescreenState extends State<Homescreen>
       ),
       body: TabBarView(
         controller: _controller,
-        children: [
+        children: const [
           ChatPage(),
           SettingsPage(),
-          // odkad chatpage i settingspage jest osobno, aplikacja mniej laguje
         ],
       ),
     );
