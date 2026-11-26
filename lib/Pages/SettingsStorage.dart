@@ -1,6 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 
-/// Tymczasowy model kategorii plików (do podmiany na prawdziwy)
+// Tymczasowy model kategorii plików (do podmiany na prawdziwy)
 class _Category {
   final String name;
   final IconData icon;

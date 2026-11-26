@@ -1,5 +1,4 @@
 import 'package:firefly/Pages/SettingsAppearance.dart';
-import 'package:firefly/Screens/buttonscreen.dart';
 import 'package:firefly/Screens/chatscreen.dart';
 import 'package:firefly/Screens/homescreen.dart';
 import 'package:firefly/Screens/welcomescreen.dart';
@@ -9,6 +8,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/services.dart';
 import 'theme.dart';
+import 'Services/SettingsService.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +19,7 @@ void main() async {
       DeviceOrientation.portraitDown,
     ]
   );
+  await settings.init();
 
   runApp(
     const ProviderScope(

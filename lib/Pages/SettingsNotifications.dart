@@ -1,9 +1,11 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:firefly/Services/SettingsService.dart';
 
-/// Tymczasowy model wyciszonego czatu (do podmiany na prawdziwy)
+//Tymczasowy model wyciszonego czatu (do podmiany na prawdziwy)
 class _MutedChat {
   final String id;
   final String title;
+
   const _MutedChat(this.id, this.title);
 }
 
@@ -15,10 +17,6 @@ class Settingsnotifications extends StatefulWidget {
 }
 
 class _SettingsnotificationsState extends State<Settingsnotifications> {
-  // --- USTAWIENIA (na razie tylko lokalnie) ---
-  bool _banners = true;
-  bool _haptics = true;
-
   // --- DANE TESTOWE ---
   final List<_MutedChat> _muted = [
     const _MutedChat("1", "Grupa niggowców"),
@@ -51,17 +49,23 @@ class _SettingsnotificationsState extends State<Settingsnotifications> {
               secondary: const Icon(Icons.vertical_align_top_rounded),
               title: const Text("In-app banners"),
               subtitle: const Text("Show a banner for messages in other chats"),
-              value: _banners,
-              onChanged: (v) => setState(() => _banners = v),
-              // tu później: zapis ustawienia 'banners'
+              value: settings.banners,
+              onChanged: (v) {
+                setState(() {
+                  settings.set('banners', v);
+                });
+              },
             ),
             SwitchListTile(
               secondary: const Icon(Icons.vibration_rounded),
               title: const Text("Haptics"),
               subtitle: const Text("Vibrate for incoming messages and calls"),
-              value: _haptics,
-              onChanged: (v) => setState(() => _haptics = v),
-              // tu później: zapis ustawienia 'haptics'
+              value: settings.haptics,
+              onChanged: (v) {
+                setState(() {
+                  settings.set('haptics', v);
+                });
+              },
             ),
 
             // --- WYCISZONE CZATY ---
@@ -86,17 +90,17 @@ class _SettingsnotificationsState extends State<Settingsnotifications> {
                 ),
 
             // --- NOTKA ---
-            Padding(
-              padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
-              child: Text(
-                "Firefly talks directly to nearby devices, so messages arrive while the app is open and connected.",
-                style: TextStyle(
-                  fontSize: 12.5,
-                  height: 1.5,
-                  color: scheme.onSurfaceVariant,
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
+            //   child: Text(
+            //     "Firefly talks directly to nearby devices, so messages arrive while the app is open and connected.",
+            //     style: TextStyle(
+            //       fontSize: 12.5,
+            //       height: 1.5,
+            //       color: scheme.onSurfaceVariant,
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -106,6 +110,7 @@ class _SettingsnotificationsState extends State<Settingsnotifications> {
 
 class _SectionHeader extends StatelessWidget {
   const _SectionHeader(this.text);
+
   final String text;
 
   @override

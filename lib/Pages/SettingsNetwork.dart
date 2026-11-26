@@ -1,9 +1,11 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:firefly/Services/SettingsService.dart';
 
 /// Tymczasowy model aktywnego połączenia (do podmiany na prawdziwy)
 class _Link {
   final String id;
   final String name;
+
   const _Link(this.id, this.name);
 }
 
@@ -102,8 +104,12 @@ class _SettingsNetworkState extends State<SettingsNetwork> {
               secondary: const Icon(Icons.sync_rounded),
               title: const Text("Auto-reconnect"),
               subtitle: const Text("Retry when a connection drops"),
-              value: _autoReconnect,
-              onChanged: (v) => setState(() => _autoReconnect = v),
+              value: settings.autoReconnect,
+              onChanged: (v) {
+                setState(() {
+                  settings.set('autoReconnect', v);
+                });
+              },
               // tu później: zapis ustawienia 'autoReconnect'
             ),
 
@@ -154,6 +160,7 @@ class _SettingsNetworkState extends State<SettingsNetwork> {
 
 class _SectionHeader extends StatelessWidget {
   const _SectionHeader(this.text);
+
   final String text;
 
   @override

@@ -2,7 +2,6 @@ import 'package:material_ui/material_ui.dart';
 import 'package:firefly/Model/ChatModel.dart';
 import 'package:firefly/Screens/chatscreen.dart';
 
-/// Tymczasowy model osoby (do podmiany, gdy podepniesz P2P)
 class _Person {
   final String name;
   final String subtitle;
@@ -55,6 +54,7 @@ class _NewChatScreenState extends State<NewChatScreen>
       context,
       MaterialPageRoute(
         builder: (context) => Chatscreen(
+          convId: p.name,
           chatModel: ChatModel(
             name: p.name,
             isGroup: false,

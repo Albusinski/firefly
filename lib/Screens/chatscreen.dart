@@ -12,9 +12,9 @@ class _Message {
 }
 
 class Chatscreen extends StatefulWidget {
+  final String convId;
   final ChatModel chatModel;
-
-  const Chatscreen({super.key, required this.chatModel});
+  const Chatscreen({super.key, required this.convId, required this.chatModel});
 
   @override
   State<Chatscreen> createState() => _ChatscreenState();
